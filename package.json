@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/TuanDao-0110/wofl/issues"
   },
-  "homepage": "https://github.com/TuanDao-0110/wofl#readme"
+  "homepage": "https://github.com/TuanDao-0110/wofl#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
 }

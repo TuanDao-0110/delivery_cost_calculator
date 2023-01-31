@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1675137711502" clover="3.2.0">
+  <project timestamp="1675137711502" name="All files">
+    <metrics statements="25" coveredstatements="23" conditionals="7" coveredconditionals="4" methods="1" coveredmethods="1" elements="33" coveredelements="28" complexity="0" loc="25" ncloc="25" packages="2" files="2" classes="2"/>
+    <package name="config">
+      <metrics statements="18" coveredstatements="16" conditionals="7" coveredconditionals="4" methods="1" coveredmethods="1"/>
+      <file name="calculator.ts" path="/Users/s2201202/bc_learn/wolf/back-end/src/config/calculator.ts">
+        <metrics statements="18" coveredstatements="16" conditionals="7" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="15" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="19" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="24" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="cond" truecount="1" falsecount="2"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="util">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="cost.ts" path="/Users/s2201202/bc_learn/wolf/back-end/src/util/cost.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
