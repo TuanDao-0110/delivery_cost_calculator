@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for config/calculator.ts</title>
+    <title>Code coverage report for dist/src/config/calculator.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">config</a> calculator.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">dist/src/config</a> calculator.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">94.73% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>18/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>8/10</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">94.73% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>18/19</span>
             </div>
         
             
@@ -93,29 +93,10 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,52 +115,44 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { RequestType } from "../model/Types";
-import {
-  COST_PER_ITEM_CENT,
-  FEE_EACH_500,
-  FREE_ITEM_AMOUNT,
-  MAX_CART_VALUE,
-  MAX_FEE_CENT,
-  MIN_CART_VALUE,
-  RUSH_HOUR_EXTRA_RATIO,
-  RUSH_HOUR_MAX,
-  RUSH_HOUR_MIN,
-  TRAVEL_DISTANCE_COUNT,
-} from "../util/cost";
-&nbsp;
-export const calculateDeliveryFee = (info: RequestType): number =&gt; {
-  let fee = 0;
-  // 1. cart value reach max 100e -&gt; free
-  if (info.cartValue &gt;= MAX_CART_VALUE) {
-    return fee;
-  }
-  // 2. calculate base on min cart value
-  if (info.cartValue &lt; MIN_CART_VALUE) {
-    fee += MIN_CART_VALUE - info.cartValue;
-  }
-  //   3. add distance cost
-  const travelCostRatio = Math.ceil(info.deliveryDistance / TRAVEL_DISTANCE_COUNT);
-  fee += travelCostRatio * FEE_EACH_500;
-  console.log(travelCostRatio);
-  //   4. add cost base on item
-  if (info.numberOfItems &gt; FREE_ITEM_AMOUNT) {
-    fee += (info.numberOfItems - FREE_ITEM_AMOUNT) * COST_PER_ITEM_CENT;
-  }
-&nbsp;
-  const date = new Date(info.deliveryTime);
-  if (date.getHours() &gt;= RUSH_HOUR_MIN &amp;&amp; date.getHours() &lt; RUSH_HOUR_MAX) {
-    fee *= RUSH_HOUR_EXTRA_RATIO;
-  }
-  return Math.min(fee, MAX_FEE_CENT);
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.calculateDeliveryFee = void 0;
+const cost_1 = require("../util/cost");
+const calculateDeliveryFee = (info) =&gt; {
+    let fee = 0;
+    // 1. cart value reach max 100e -&gt; free
+    if (info.cartValue &gt;= cost_1.MAX_CART_VALUE) {
+        return fee;
+    }
+    // 2. calculate base on min cart value
+    if (info.cartValue &lt; cost_1.MIN_CART_VALUE) {
+        fee += cost_1.MIN_CART_VALUE - info.cartValue;
+    }
+    //   3. add distance cost
+    const travelCostRatio = Math.ceil(info.deliveryDistance / cost_1.TRAVEL_DISTANCE_COUNT);
+    fee += travelCostRatio * cost_1.FEE_EACH_500;
+    console.log(travelCostRatio);
+    //   4. add cost base on item
+    if (info.numberOfItems &gt; cost_1.FREE_ITEM_AMOUNT) {
+        fee += (info.numberOfItems - cost_1.FREE_ITEM_AMOUNT) * cost_1.COST_PER_ITEM_CENT;
+    }
+    const date = new Date(info.deliveryTime);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (date.getHours() &gt;= cost_1.RUSH_HOUR_MIN &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >date.getHours() &lt; cost_1.RUSH_HOUR_MAX)</span> {
+<span class="cstat-no" title="statement not covered" >        fee *= cost_1.RUSH_HOUR_EXTRA_RATIO;</span>
+    }
+    // return 100
+    return Math.min(fee, cost_1.MAX_FEE_CENT);
 };
+exports.calculateDeliveryFee = calculateDeliveryFee;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -187,16 +160,16 @@ export const calculateDeliveryFee = (info: RequestType): number =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-01T05:31:08.964Z
+                at 2023-02-01T05:29:05.251Z
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     

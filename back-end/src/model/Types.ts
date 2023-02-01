@@ -2,7 +2,7 @@ export interface RequestType {
   cartValue: number;
   deliveryDistance: number;
   numberOfItems: number;
-  deliveryTime: Date | string;
+  deliveryTime: string ;
 }
 
 export interface ResponseType {

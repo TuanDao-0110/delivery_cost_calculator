@@ -17,7 +17,7 @@ const express_1 = __importDefault(require("express"));
 const calculator_1 = require("../config/calculator");
 const router = express_1.default.Router();
 exports.calculate_router = router;
-router.get("/api/delivery_fee", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/api/delivery_fee", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { cartDetails } = req.body;
         const delivery_fee = (0, calculator_1.calculateDeliveryFee)(cartDetails);

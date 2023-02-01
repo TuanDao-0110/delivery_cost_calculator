@@ -7,3 +7,7 @@ export const TRAVEL_DISTANCE_COUNT = 500; //met
 
 export const FREE_ITEM_AMOUNT = 4; // items
 export const COST_PER_ITEM_CENT = 50; // cents
+
+export const RUSH_HOUR_MIN = 15;
+export const RUSH_HOUR_MAX = 19;
+export const RUSH_HOUR_EXTRA_RATIO = 1.2;
