@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Location } from "./component/venues_list/Location";
 import { SubmitType } from "./util/types";
 export const getDeliveryCost = async (params: SubmitType) => {
   try {
@@ -20,28 +21,18 @@ export const getDeliveryCost = async (params: SubmitType) => {
   }
 };
 
-export const getList = async () => {
+export const getList = async (location: Location) => {
   try {
-    const { data, status } = await axios({
+    const { status, data } = await axios({
       method: "get",
-      url: "https://cors-anywhere.herokuapp.com/https://restaurant-api.wolt.com/v1/pages/restaurants?lat=60.170187&lon=24.930599",
+      url: `https://restaurant-api.wolt.com/v1/pages/restaurants?lat=${location.latitude}&lon=${location.longitude}`,
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log(data);
-    // const data = fetch("https://cors-anywhere.herokuapp.com/https://restaurant-api.wolt.com/v1/pages/restaurants?lat=60.170187&lon=24.930599", {
-    //   // headers:
-    //   method: "get",
-    // })
-    //   .then((data) => {
-    //     data.json();
-    //   })
-    //   .then((res) => {
-    //     res
-    //   });
-    // console.log(data);
+
+    return data;
   } catch (error) {
-    return error;
+    throw Error("fail fetching data");
   }
 };

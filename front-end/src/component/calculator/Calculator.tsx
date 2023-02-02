@@ -3,7 +3,6 @@ import bg from "../../assets/bg.avif";
 
 import { SubmitType, InputType, ReceiveType } from "../../util/types";
 import { getDeliveryCost } from "../../apiService";
-import { Link, NavLink } from "react-router-dom";
 function Calculator() {
   const [submitForm, SetSubmitForm] = useState<SubmitType>({
     cartValue: "",
@@ -22,11 +21,13 @@ function Calculator() {
   };
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    getDeliveryCost(submitForm).then((data) =>
-      setRecieveFee((prev) => {
-        return { delivery_fee: Number((data.delivery_fee / 100).toFixed(2)) };
-      })
-    );
+    getDeliveryCost(submitForm).then((data) => {
+      if (!(data instanceof Error)) {
+        return setRecieveFee((prev) => {
+          return { delivery_fee: Number((data.delivery_fee / 100).toFixed(2)) };
+        });
+      }
+    });
   };
   const renderInput = (typeInput: keyof SubmitType) => {
     switch (typeInput) {
@@ -129,7 +130,6 @@ function Calculator() {
   };
   return (
     <div className="App">
-    
       <div className="relative flex flex-wrap lg:h-screen lg:items-center">
         <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-lg text-center">

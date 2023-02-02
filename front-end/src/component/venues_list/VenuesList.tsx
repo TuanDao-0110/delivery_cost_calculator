@@ -1,15 +1,9 @@
-import React, { ReactComponentElement, ReactElement, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getList } from "../../apiService";
-import data from "./data.json";
-import bg from "../../assets/bg.avif";
+import localData from "./data.json";
 import { MemoizedFoodTag } from "./FoodTag";
-type IconType = "🚚" | "⭐" | "🕛" | "🛣";
-enum SortableItemId {
-  deliveryPrice = "delivery-price",
-  rating = "rating",
-  deliveryestimate = "delivery-estimate",
-  distance = "distance",
-}
+import { getUserLocation, Location } from "./Location";
+
 interface VenuesType {
   [any: string]: any;
   address: string;
@@ -30,15 +24,36 @@ interface StateType {
 }
 export const VenuesList = () => {
   const [listRestaurants, setListRestaurants] = useState<StateType[]>([] as StateType[]);
+  // 1. set up location request
+  const [location, setLocation] = useState<Location>({
+    latitude: 60.170187,
+    longitude: 24.930599,
+  });
+  // 2. loading more food card
   const [load, setLoad] = useState<number>(15);
-  const img: string = new URL(`../../assets/bg.avif`, import.meta.url).href;
-
+  // 3. loading list restaurant
   useEffect(() => {
-    getList();
-    setListRestaurants((prev) => {
-      return [...createListRestaurant(data.sections[1].items as unknown as StateType[])];
-    });
-  }, [load]);
+    getList(location)
+      .then((data) => {
+        if (!(data instanceof Error)) {
+          setListRestaurants((prev) => {
+            return [...createListRestaurant(data.sections[1].items as unknown as StateType[])];
+          });
+        }
+      })
+      .catch((data) => {
+        if (data instanceof Error) {
+          setListRestaurants((prev) => {
+            return [...createListRestaurant(localData.sections[1].items as unknown as StateType[])];
+          });
+        }
+      });
+  }, [load, location]);
+  // 4. loading get user location
+  useEffect(() => {
+    getUserLocation().then((data) => setLocation(data));
+  }, []);
+
   const createListRestaurant = (newData: StateType[]) => {
     let newList: StateType[];
 
@@ -55,6 +70,7 @@ export const VenuesList = () => {
     }
     return newList;
   };
+  
   const handleLoadMore = () => {
     setLoad((prev) => {
       return (prev += 5);
@@ -116,7 +132,6 @@ export const VenuesList = () => {
                 {venue.short_description}
               </p>
               <div tabIndex={0} className="focus:outline-none flex gap-1 capitalize">
-                {/* {renderTags(venue.tags)} */}
                 <MemoizedFoodTag tag={venue.tags} />
               </div>
             </div>
@@ -143,7 +158,7 @@ export const VenuesList = () => {
       <h1 className="text-6xl text-cyan-500">Wolt Restaurant list</h1>
       {renderRestaurent(listRestaurants)}
       <button onClick={handleLoadMore} className="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">
-        Load more 🍽 -{load}
+        Load more 🍽 + {load}
       </button>
     </div>
   );

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.calculateDeliveryFee = void 0;
 const cost_1 = require("../util/cost");
 const calculateDeliveryFee = (info) => {
-    console.log(info.deliveryTime);
     let fee = 0;
     // 1. cart value reach max 100e -> free
     if (info.cartValue >= cost_1.MAX_CART_VALUE) {

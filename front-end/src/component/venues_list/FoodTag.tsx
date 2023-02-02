@@ -4,7 +4,6 @@ type props = {
   tag: Array<string>;
 };
 const FoodTag = ({ tag }: props) => {
-  //   const { tag } = prop;
   return (
     <>
       {tag?.map((item, index) => {
@@ -20,13 +19,3 @@ const FoodTag = ({ tag }: props) => {
 
 // export default FoodTag;
 export const MemoizedFoodTag = React.memo(FoodTag);
-
-interface RequiredProperties {
-  name: string;
-  id: string;
-}
-const newOb: RequiredProperties & Record<string, any> = {
-  id: "",
-  name: "",
-  f: "4",
-};

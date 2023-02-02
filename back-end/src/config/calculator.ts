@@ -13,7 +13,6 @@ import {
 } from "../util/cost";
 
 export const calculateDeliveryFee = (info: RequestType): number => {
-  console.log(info.deliveryTime);
   let fee = 0;
   // 1. cart value reach max 100e -> free
   if (info.cartValue >= MAX_CART_VALUE) {
