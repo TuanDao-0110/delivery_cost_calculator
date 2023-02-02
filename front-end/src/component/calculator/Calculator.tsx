@@ -1,8 +1,9 @@
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
-import bg from "../assets/bg.avif";
+import bg from "../../assets/bg.avif";
 
-import { SubmitType, InputType, ReceiveType } from "../util/types";
-import { getDeliveryCost } from "../apiService";
+import { SubmitType, InputType, ReceiveType } from "../../util/types";
+import { getDeliveryCost } from "../../apiService";
+import { Link, NavLink } from "react-router-dom";
 function Calculator() {
   const [submitForm, SetSubmitForm] = useState<SubmitType>({
     cartValue: "",
@@ -128,6 +129,7 @@ function Calculator() {
   };
   return (
     <div className="App">
+    
       <div className="relative flex flex-wrap lg:h-screen lg:items-center">
         <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-lg text-center">

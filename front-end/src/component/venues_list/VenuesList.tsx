@@ -1,69 +1,55 @@
 import React, { ReactComponentElement, ReactElement, useEffect, useState } from "react";
-import { getList } from "../apiService";
+import { getList } from "../../apiService";
 import data from "./data.json";
-import bg from "../assets/bg.avif";
+import bg from "../../assets/bg.avif";
+import { MemoizedFoodTag } from "./FoodTag";
 type IconType = "🚚" | "⭐" | "🕛" | "🛣";
-const tagIcon = ["🍮", "🥦", "🥩", "🍺", "🌽"];
 enum SortableItemId {
   deliveryPrice = "delivery-price",
   rating = "rating",
   deliveryestimate = "delivery-estimate",
   distance = "distance",
 }
+interface VenuesType {
+  [any: string]: any;
+  address: string;
+  delivery_price: string;
+  id: string;
+  rating: { rating: number; score: number };
+  tags: Array<string>;
+  name: string;
+  short_description: string;
+}
+interface ImageType {
+  url: string;
+}
+interface StateType {
+  like: boolean;
+  venue: VenuesType;
+  image: ImageType;
+}
 export const VenuesList = () => {
-  const [listRestaurants, setListRestaurants] = useState([]);
+  const [listRestaurants, setListRestaurants] = useState<StateType[]>([] as StateType[]);
+  const [load, setLoad] = useState<number>(15);
+  const img: string = new URL(`../../assets/bg.avif`, import.meta.url).href;
 
   useEffect(() => {
     getList();
     setListRestaurants((prev) => {
-      return (prev = [...createListRestaurant(data.sections[1].items)]);
+      return (prev = [...createListRestaurant(data.sections[1].items as unknown as StateType[])]);
     });
   }, []);
-  const createListRestaurant = (newData) => {
+  const createListRestaurant = (newData: StateType[]) => {
     let listRestaurants = [];
     for (let i of newData.slice(0, 15)) {
       const { image, venue } = i;
 
       listRestaurants.push(Object.assign({}, { image, venue, like: false }));
     }
-    console.log(listRestaurants);
     return listRestaurants;
   };
-  const renderSortable = (sortable) => {
-    return sortable.map((item, index) => {
-      const { id, value } = item;
-      let icon: IconType;
-      switch (id) {
-        case SortableItemId.deliveryPrice:
-          icon = "🚚";
-          break;
-        case SortableItemId.rating:
-          icon = "⭐";
-          break;
-        case SortableItemId.distance:
-          icon = "🛣";
-          break;
-        default:
-          icon = "🕛";
-          break;
-      }
-      return (
-        <p>
-          {icon} {id} - {value}
-        </p>
-      );
-    });
-  };
-  const renderTags = (tag: Array<string>): ReactElement[] => {
-    return tag?.map((item, index) => {
-      return (
-        <div key={index} className="py-2 px-4 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100">
-          {tagIcon[Math.round(Math.random() * 4)]} {item}
-        </div>
-      );
-    });
-  };
-  const renderRestaurent = (restaurantArray) => {
+
+  const renderRestaurent = (restaurantArray: typeof listRestaurants) => {
     return restaurantArray.slice(0, 15).map((item, index) => {
       const { venue, image, like } = item;
       return (
@@ -119,7 +105,8 @@ export const VenuesList = () => {
                 {venue.short_description}
               </p>
               <div tabIndex={0} className="focus:outline-none flex gap-1 capitalize">
-                {renderTags(venue.tags)}
+                {/* {renderTags(venue.tags)} */}
+                <MemoizedFoodTag tag={venue.tags} />
               </div>
             </div>
           </div>
@@ -127,7 +114,7 @@ export const VenuesList = () => {
       );
     });
   };
-  const handleLike = (id, listRestaurants) => {
+  const handleLike = (id: string, listRestaurants: StateType[]) => {
     let index = listRestaurants.findIndex((i) => i.venue.id === id);
     setListRestaurants((prev) => {
       let temp = listRestaurants;
@@ -136,7 +123,12 @@ export const VenuesList = () => {
     });
   };
   return (
-    <div aria-label="group of cards" tabIndex={0} className="relative focus:outline-none py-8 w-full flex justify-center items-center gap-5 flex-col">
+    <div
+      aria-label="group of cards"
+      tabIndex={0}
+      style={{ backgroundImage: `require('../../assets/bg.avif')`, backgroundSize: "100%" }}
+      className="relative focus:outline-none py-8 w-full flex justify-center items-center gap-5 flex-col "
+    >
       {renderRestaurent(listRestaurants)}
     </div>
   );
