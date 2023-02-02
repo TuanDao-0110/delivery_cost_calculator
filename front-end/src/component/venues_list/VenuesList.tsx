@@ -15,7 +15,7 @@ interface VenuesType {
   address: string;
   delivery_price: string;
   id: string;
-  rating: { rating: number; score: number };
+  rating?: { rating: number; score: number };
   tags: Array<string>;
   name: string;
   short_description: string;
@@ -36,21 +36,32 @@ export const VenuesList = () => {
   useEffect(() => {
     getList();
     setListRestaurants((prev) => {
-      return (prev = [...createListRestaurant(data.sections[1].items as unknown as StateType[])]);
+      return [...createListRestaurant(data.sections[1].items as unknown as StateType[])];
     });
-  }, []);
+  }, [load]);
   const createListRestaurant = (newData: StateType[]) => {
-    let listRestaurants = [];
-    for (let i of newData.slice(0, 15)) {
-      const { image, venue } = i;
+    let newList: StateType[];
 
-      listRestaurants.push(Object.assign({}, { image, venue, like: false }));
+    if (listRestaurants.length) {
+      newList = [...listRestaurants];
+    } else {
+      newList = [];
     }
-    return listRestaurants;
+    for (let i of newData.slice(0, load)) {
+      const { image, venue } = i;
+      if (newList.findIndex((e) => e.venue.id === venue.id) === -1) {
+        newList.push(Object.assign({}, { image, venue, like: false }));
+      }
+    }
+    return newList;
   };
-
+  const handleLoadMore = () => {
+    setLoad((prev) => {
+      return (prev += 5);
+    });
+  };
   const renderRestaurent = (restaurantArray: typeof listRestaurants) => {
-    return restaurantArray.slice(0, 15).map((item, index) => {
+    return restaurantArray.map((item, index) => {
       const { venue, image, like } = item;
       return (
         <div key={index} className="lg:flex items-center justify-center w-7/12 sticky top-0">
@@ -70,7 +81,7 @@ export const VenuesList = () => {
                     {/* 36 members */}
                     <p className="text-red-300">🏢 {venue.address}</p>
                     <p className="text-red-300">🚚 {venue.delivery_price}</p>
-                    <p className="text-red-300">⭐ {venue.rating.rating}</p>
+                    <p className="text-red-300">⭐ {venue?.rating?.rating}</p>
                   </div>
                 </div>
                 <div
@@ -129,7 +140,11 @@ export const VenuesList = () => {
       style={{ backgroundImage: `require('../../assets/bg.avif')`, backgroundSize: "100%" }}
       className="relative focus:outline-none py-8 w-full flex justify-center items-center gap-5 flex-col "
     >
+      <h1 className="text-6xl text-cyan-500">Wolt Restaurant list</h1>
       {renderRestaurent(listRestaurants)}
+      <button onClick={handleLoadMore} className="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">
+        Load more 🍽 -{load}
+      </button>
     </div>
   );
 };
