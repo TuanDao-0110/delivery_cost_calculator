@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd front-end && npm run dev\" \"cd back-end && npm run server\""
+    "dev": "concurrently \"cd front-end && npm run dev\" \"cd back-end && npm run server\"",
+    "setup": "concurrently \"cd front-end && npm install\" \"cd back-end && npm install\""
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,8 @@
   "homepage": "https://github.com/TuanDao-0110/wofl#readme",
   "dependencies": {
     "concurrently": "^7.6.0"
+  },
+  "devDependencies": {
+    "cypress": "^12.5.1"
   }
 }

@@ -69,3 +69,6 @@ interface StateType {
 2. Frontend: React TS, 
 3. UI Framework: Tailwind.
 4. Testing: Jest TS.
+
+## Running: 
+1. set up terminal in wolt
